@@ -1040,15 +1040,54 @@ footer a:hover { color: white; }
 <!-- SECTION 8: ACCOUNT -->
 <section class="page" id="account">
   <div class="container">
-    <div class="page-heading"><span class="eyebrow">Patient account</span><h1>Sign in</h1><p>Enter your account information to continue.</p></div>
-    <form class="form-card" id="accountForm">
-      <div class="form-grid">
-        <div class="form-group full"><label for="accountEmail">Email address *</label><input id="accountEmail" type="email" required placeholder="you@example.com"></div>
-        <div class="form-group full"><label for="accountPassword">Password *</label><input id="accountPassword" type="password" required minlength="4" placeholder="Enter password"></div>
+    <div class="page-heading">
+      <span class="eyebrow">Patient account</span>
+      <h1 id="accountTitle">Sign in</h1>
+      <p id="accountSub">Enter your account information to continue.</p>
+    </div>
+
+    <!-- Auth Form View -->
+    <div id="authFormView">
+      <form class="form-card" id="accountForm">
+        <div class="form-grid">
+          <div class="form-group full" id="fullNameGroup" style="display:none">
+            <label for="accountName">Full Name *</label>
+            <input id="accountName" placeholder="Enter your full name">
+          </div>
+          <div class="form-group full">
+            <label for="accountEmail">Email address *</label>
+            <input id="accountEmail" type="email" required placeholder="you@example.com">
+          </div>
+          <div class="form-group full">
+            <label for="accountPassword">Password *</label>
+            <input id="accountPassword" type="password" required minlength="4" placeholder="Enter password">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn" type="submit" id="submitAccountBtn">Sign In →</button>
+          <button class="btn btn-outline" id="createAccountButton" type="button">Create Account</button>
+        </div>
+        <div class="message" id="accountMessage" role="status"></div>
+      </form>
+    </div>
+
+    <!-- Active User Dashboard View -->
+    <div id="userDashboardView" style="display:none">
+      <div class="form-card">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:16px;">
+          <div style="width:50px; height:50px; border-radius:50%; background:var(--primary); color:white; display:grid; place-items:center; font-size:22px; font-weight:800;" id="userAvatar">U</div>
+          <div>
+            <h3 style="color:var(--dark)" id="loggedInName">User Name</h3>
+            <p style="color:var(--muted); font-size:13px" id="loggedInEmail">user@example.com</p>
+          </div>
+        </div>
+        <div style="background:var(--light); padding:16px; border-radius:12px; border:1px solid var(--border); margin-bottom:20px;">
+          <strong style="color:var(--dark); display:block; margin-bottom:4px">Account Status: Active</strong>
+          <small style="color:var(--muted)">You are signed in to your MediFlow account on this device.</small>
+        </div>
+        <button class="btn btn-outline" id="signOutBtn" type="button">Sign Out</button>
       </div>
-      <div class="form-actions"><button class="btn" type="submit">Sign In →</button><button class="btn btn-outline" id="createAccountButton" type="button">Create Account</button></div>
-      <div class="message" id="accountMessage" role="status"></div>
-    </form>
+    </div>
   </div>
 </section>
 </main>
@@ -1099,7 +1138,10 @@ menuToggle.addEventListener("click", () => {
 });
 
 window.addEventListener("hashchange", showPage);
-window.addEventListener("DOMContentLoaded", showPage);
+window.addEventListener("DOMContentLoaded", () => {
+  showPage();
+  checkAuthSession();
+});
 document.getElementById("year").textContent = new Date().getFullYear();
 
 /* Doctor directory */
@@ -1353,14 +1395,115 @@ document.getElementById("contactForm").addEventListener("submit", event => {
   showMessage("contactMessage", "Thank you for reaching out! Your message has been submitted.");
 });
 
-document.getElementById("accountForm").addEventListener("submit", event => {
-  event.preventDefault();
-  showMessage("accountMessage", "Sign in request received (Demo Mode).");
+/* LOCALSTORAGE AUTHENTICATION LOGIC */
+let isSignUpMode = false;
+
+const accountTitle = document.getElementById("accountTitle");
+const accountSub = document.getElementById("accountSub");
+const fullNameGroup = document.getElementById("fullNameGroup");
+const accountName = document.getElementById("accountName");
+const accountEmail = document.getElementById("accountEmail");
+const accountPassword = document.getElementById("accountPassword");
+const submitAccountBtn = document.getElementById("submitAccountBtn");
+const createAccountButton = document.getElementById("createAccountButton");
+const accountForm = document.getElementById("accountForm");
+const accountMessage = document.getElementById("accountMessage");
+const authFormView = document.getElementById("authFormView");
+const userDashboardView = document.getElementById("userDashboardView");
+
+createAccountButton.addEventListener("click", () => {
+  isSignUpMode = !isSignUpMode;
+  accountMessage.classList.remove("show");
+
+  if (isSignUpMode) {
+    accountTitle.textContent = "Create Account";
+    accountSub.textContent = "Register your account details below.";
+    fullNameGroup.style.display = "flex";
+    accountName.required = true;
+    submitAccountBtn.textContent = "Create Account →";
+    createAccountButton.textContent = "Already have an account? Sign In";
+  } else {
+    accountTitle.textContent = "Sign in";
+    accountSub.textContent = "Enter your account information to continue.";
+    fullNameGroup.style.display = "none";
+    accountName.required = false;
+    submitAccountBtn.textContent = "Sign In →";
+    createAccountButton.textContent = "Create Account";
+  }
 });
 
-document.getElementById("createAccountButton").addEventListener("click", () => {
-  showMessage("accountMessage", "Registration is in demo mode.");
+accountForm.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const email = accountEmail.value.trim().toLowerCase();
+  const password = accountPassword.value.trim();
+  const users = JSON.parse(localStorage.getItem("mediflow_saved_users") || "[]");
+
+  if (isSignUpMode) {
+    const name = accountName.value.trim();
+
+    if (users.some(u => u.email === email)) {
+      showMessage("accountMessage", "An account with this email already exists. Please sign in instead.");
+      return;
+    }
+
+    const newUser = { name, email, password };
+    users.push(newUser);
+    localStorage.setItem("mediflow_saved_users", JSON.stringify(users));
+    localStorage.setItem("mediflow_active_session", JSON.stringify(newUser));
+
+    accountForm.reset();
+    checkAuthSession();
+  } else {
+    const user = users.find(u => u.email === email && u.password === password);
+
+    if (user) {
+      localStorage.setItem("mediflow_active_session", JSON.stringify(user));
+      accountForm.reset();
+      checkAuthSession();
+    } else {
+      showMessage("accountMessage", "Invalid email or password. Please verify credentials or create a new account.");
+    }
+  }
 });
+
+document.getElementById("signOutBtn").addEventListener("click", () => {
+  localStorage.removeItem("mediflow_active_session");
+  checkAuthSession();
+});
+
+function checkAuthSession() {
+  const activeUser = JSON.parse(localStorage.getItem("mediflow_active_session"));
+
+  if (activeUser) {
+    authFormView.style.display = "none";
+    userDashboardView.style.display = "block";
+    accountTitle.textContent = "My Account";
+    accountSub.textContent = "You are logged in to your MediFlow account.";
+
+    document.getElementById("loggedInName").textContent = activeUser.name || "Patient Account";
+    document.getElementById("loggedInEmail").textContent = activeUser.email;
+    document.getElementById("userAvatar").textContent = (activeUser.name || activeUser.email).charAt(0).toUpperCase();
+
+    if (activeUser.name) {
+      document.getElementById("patientName").value = activeUser.name;
+      document.getElementById("regName").value = activeUser.name;
+    }
+    if (activeUser.email) {
+      document.getElementById("patientEmail").value = activeUser.email;
+    }
+  } else {
+    authFormView.style.display = "block";
+    userDashboardView.style.display = "none";
+    isSignUpMode = false;
+    accountTitle.textContent = "Sign in";
+    accountSub.textContent = "Enter your account information to continue.";
+    fullNameGroup.style.display = "none";
+    accountName.required = false;
+    submitAccountBtn.textContent = "Sign In →";
+    createAccountButton.textContent = "Create Account";
+  }
+}
 
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, character => ({
