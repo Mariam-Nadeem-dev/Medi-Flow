@@ -850,6 +850,41 @@ footer a:hover { color: white; }
       <form class="form-card" id="appointmentForm">
         <h3 style="color:var(--dark);margin-bottom:15px">Patient Information</h3>
         <div class="form-grid">
+          <div class="form-group full">
+            <label for="hospitalSelect">Select Hospital *</label>
+            <select id="hospitalSelect" name="hospital" required>
+              <option value="">Choose a hospital in Karachi</option>
+              <option>Aga Khan University Hospital</option>
+              <option>Liaquat National Hospital</option>
+              <option>Jinnah Postgraduate Medical Centre</option>
+              <option>Dr. Ruth K. M. Pfau Civil Hospital</option>
+              <option>Indus Hospital & Health Network</option>
+              <option>Dr. Ziauddin Hospital</option>
+              <option>South City Hospital</option>
+              <option>National Institute of Cardiovascular Diseases (NICVD)</option>
+              <option>National Institute of Child Health (NICH)</option>
+              <option>Abbasi Shaheed Hospital</option>
+              <option>Dow University Hospital</option>
+              <option>Darul Sehat Hospital</option>
+              <option>Dean Hospital</option>
+              <option>Memon Medical Institute Hospital</option>
+              <option>National Medical Centre</option>
+              <option>Mamji Hospital</option>
+              <option>Lady Dufferin Hospital</option>
+              <option>Karachi Adventist Hospital</option>
+              <option>Imam Clinic</option>
+              <option>Kharadar General Hospital</option>
+              <option>Jinnah Medical College Hospital</option>
+              <option>The Kidney Centre</option>
+              <option>Patel Hospital</option>
+              <option>Burhani Hospital</option>
+              <option>Altamash General Hospital</option>
+              <option>National Institute of Blood Diseases (NIBD)</option>
+              <option>Sindh Government Hospital, New Karachi</option>
+              <option>Sindh Government Hospital, Korangi</option>
+              <option>Sindh Government Hospital, Liaquatabad</option>
+            </select>
+          </div>
           <div class="form-group"><label for="patientName">Full name *</label><input id="patientName" name="patientName" required placeholder="Enter full name"></div>
           <div class="form-group"><label for="patientAge">Age *</label><input id="patientAge" name="age" type="number" min="1" max="120" required placeholder="Age"></div>
           <div class="form-group"><label for="patientEmail">Email *</label><input id="patientEmail" name="email" type="email" required placeholder="you@example.com"></div>
@@ -895,6 +930,7 @@ footer a:hover { color: white; }
         </div>
 
         <div class="token-details-grid">
+          <div class="tracker-detail" style="grid-column: 1 / -1;"><small>Hospital</small><strong id="sideHospital">--</strong></div>
           <div class="tracker-detail"><small>Patient Name</small><strong id="sidePatientName">--</strong></div>
           <div class="tracker-detail"><small>Queue Position</small><strong id="sideQueuePos">--</strong></div>
           <div class="tracker-detail"><small>Est. Wait Time</small><strong id="sideWaitTime">-- mins</strong></div>
@@ -1284,8 +1320,9 @@ appointmentForm.addEventListener("submit", event => {
 
   bookings.set(token, booking);
 
-  // Update Side-by-Side Panel Details
+  // Update Side-by-Side Panel Details including Hospital
   document.getElementById("sideTokenNumber").textContent = token;
+  document.getElementById("sideHospital").textContent = data.hospital;
   document.getElementById("sidePatientName").textContent = data.patientName;
   document.getElementById("sideQueuePos").textContent = "#" + booking.queue;
   document.getElementById("sideWaitTime").textContent = booking.wait + " mins";
@@ -1300,7 +1337,7 @@ appointmentForm.addEventListener("submit", event => {
   const box = document.getElementById("appointmentMessage");
   box.innerHTML = `
     <strong style="color:var(--dark)">Appointment Created Successfully!</strong><br>
-    Your token details have been populated in the side panel. 
+    Your token details for <strong>${escapeHTML(data.hospital)}</strong> have been populated in the side panel. 
     <a href="#tracker" style="color:var(--primary);font-weight:bold" onclick="showToken('${token}')">Track Token Now →</a>
   `;
   box.classList.add("show");
@@ -1347,6 +1384,7 @@ function showToken(token) {
     <h3 style="color:var(--dark);margin-top:5px">Appointment details</h3>
 
     <div class="token-details-grid" style="grid-template-columns: repeat(3, 1fr); margin-top:15px">
+      <div class="tracker-detail" style="grid-column: 1 / -1;"><small>Hospital</small><strong>${escapeHTML(booking.hospital)}</strong></div>
       <div class="tracker-detail"><small>Patient</small><strong>${escapeHTML(booking.patientName)}</strong></div>
       <div class="tracker-detail"><small>Age</small><strong>${escapeHTML(booking.age)}</strong></div>
       <div class="tracker-detail"><small>Department</small><strong>${escapeHTML(booking.department)}</strong></div>
