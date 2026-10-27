@@ -33,7 +33,7 @@ How to Run
 
 Live Website
 
-Visit the published website: [Add your website URL here]
+Visit the published website:  https://mariam-nadeem-dev.github.io/Medi-Flow/
 
 Future Improvements
 
