@@ -885,8 +885,8 @@ footer a:hover { color: white; }
               <option>Sindh Government Hospital, Liaquatabad</option>
             </select>
           </div>
-          <div class="form-group"><label for="patientName">Full name *</label><input id="patientName" name="patientName" required placeholder="Enter full name"></div>
-          <div class="form-group"><label for="patientAge">Age *</label><input id="patientAge" name="age" type="number" min="1" max="120" required placeholder="Age"></div>
+          <div class="form-group"><label for="patientName">Patient's full name *</label><input id="patientName" name="patientName" required placeholder="Enter full name"></div>
+          <div class="form-group"><label for="patientAge">Patient's age *</label><input id="patientAge" name="age" type="number" min="1" max="120" required placeholder="Age"></div>
           <div class="form-group"><label for="patientEmail">Email *</label><input id="patientEmail" name="email" type="email" required placeholder="you@example.com"></div>
           <div class="form-group"><label for="patientPhone">Phone number *</label><input id="patientPhone" name="phone" type="tel" required placeholder="+92 300 1234567"></div>
           <div class="form-group">
@@ -894,13 +894,13 @@ footer a:hover { color: white; }
             <select id="department" name="department" required>
               <option value="">Choose department</option>
               <option>General Medicine</option><option>Cardiology</option><option>Dermatology</option><option>Neurology</option><option>Pediatrics</option><option>Orthopedics</option><option>Gynecology</option><option>ENT</option>
-            </select>
+           </select>
           </div>
           <div class="form-group">
-            <label for="doctorSelect">Preferred doctor *</label>
-            <select id="doctorSelect" name="doctor" required>
-              <option value="">Choose a department first</option>
-            </select>
+            <label for="doctorSelect">Preferred doctor (Optional)</label>
+           <select id="doctorSelect" name="doctor">
+             <option value="">Choose doctor (Optional)</option>
+           </select>
           </div>
           <div class="form-group"><label for="appointmentDate">Preferred date *</label><input id="appointmentDate" name="date" type="date" required></div>
           <div class="form-group">
@@ -1265,7 +1265,7 @@ function updateDoctorOptions() {
   const matches = doctors.filter(d => d.department === department);
 
   doctorSelect.innerHTML =
-    '<option value="">Choose a doctor</option>';
+    '<option value="">Choose doctor (Optional)</option>';
 
   matches.forEach(d => {
     const option = document.createElement("option");
@@ -1310,6 +1310,13 @@ appointmentForm.addEventListener("submit", event => {
     new FormData(appointmentForm).entries()
   );
 
+  // Auto-assign an available doctor if patient didn't select one
+  if (!data.doctor) {
+    const deptDoctors = doctors.filter(d => d.department === data.department);
+    const availableDoc = deptDoctors.find(d => d.status === "Available") || deptDoctors[0];
+    data.doctor = availableDoc ? availableDoc.name : `Duty Doctor (${data.department})`;
+  }
+
   const token = "MF" + nextToken++;
 
   const booking = {
@@ -1320,7 +1327,7 @@ appointmentForm.addEventListener("submit", event => {
 
   bookings.set(token, booking);
 
-  // Update Side-by-Side Panel Details including Hospital
+  // Update Side-by-Side Panel Details including Hospital & Assigned Doctor
   document.getElementById("sideTokenNumber").textContent = token;
   document.getElementById("sideHospital").textContent = data.hospital;
   document.getElementById("sidePatientName").textContent = data.patientName;
@@ -1337,13 +1344,14 @@ appointmentForm.addEventListener("submit", event => {
   const box = document.getElementById("appointmentMessage");
   box.innerHTML = `
     <strong style="color:var(--dark)">Appointment Created Successfully!</strong><br>
+    Assigned Doctor: <strong>${escapeHTML(data.doctor)}</strong><br>
     Your token details for <strong>${escapeHTML(data.hospital)}</strong> have been populated in the side panel. 
     <a href="#tracker" style="color:var(--primary);font-weight:bold" onclick="showToken('${token}')">Track Token Now →</a>
   `;
   box.classList.add("show");
 
   appointmentForm.reset();
-  doctorSelect.innerHTML = '<option value="">Choose a department first</option>';
+  doctorSelect.innerHTML = '<option value="">Choose doctor (Optional)</option>';
 });
 
 /* Side Panel Track Button listener */
@@ -1359,7 +1367,7 @@ document.getElementById("sideTrackBtn").addEventListener("click", () => {
 appointmentForm.addEventListener("reset", () => {
   setTimeout(() => {
     document.getElementById("appointmentMessage").classList.remove("show");
-    doctorSelect.innerHTML = '<option value="">Choose a department first</option>';
+    doctorSelect.innerHTML = '<option value="">Choose doctor (Optional)</option>';
   }, 0);
 });
 
