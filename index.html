@@ -272,6 +272,28 @@ h1, h2, h3 { font-family: Manrope, sans-serif; }
 
 .content-section { padding: 58px 0; }
 
+.video-section {
+  padding: 40px 0 10px 0;
+}
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .section-heading {
   text-align: center;
   max-width: 690px;
@@ -638,11 +660,17 @@ th {
   margin-bottom: 12px;
 }
 
+.hospital-card-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: auto;
+}
+
 .hospital-card a {
   font-size: 13px;
   color: var(--primary);
   font-weight: 800;
-  margin-top: auto;
 }
 
 .contact-grid {
@@ -808,6 +836,20 @@ footer a:hover { color: white; }
         <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1100&q=85" alt="Healthcare professionals in a hospital">
         <div class="floating-card"><strong>Care made convenient</strong><small>Plan your visit with ease</small></div>
       </div>
+    </div>
+  </div>
+
+  <!-- VIDEO SECTION BEFORE OUR SERVICES -->
+  <div class="container video-section">
+    <div class="section-heading">
+      <span class="eyebrow">Video Preview</span>
+      <h2>Watch How to Book an Appointment</h2>
+      <p>You can watch the video below to learn how to quickly book an appointment and manage your visit.</p>
+    </div>
+    <div class="video-wrapper">
+      <video controls poster="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1100&q=85">
+        <source src="video.mp4/Medi-Flow-website-video.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 
@@ -1009,38 +1051,38 @@ footer a:hover { color: white; }
     <div class="hospital-search"><input id="hospitalSearch" placeholder="Search by hospital name or area..."></div>
     <div class="hospital-grid" id="hospitalGrid">
 
-      <article class="hospital-card" data-search="aga khan university hospital stadium road"><div class="hospital-icon">🏥</div><h3>Aga Khan University Hospital</h3><p>Stadium Road</p><a href="https://hospitals.aku.edu/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="liaquat national hospital lnh stadium road"><div class="hospital-icon">✚</div><h3>Liaquat National Hospital</h3><p>National Stadium Road</p><a href="https://www.lnh.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="jinnah hospital jpmc jinnah postgraduate medical centre"><div class="hospital-icon">🏥</div><h3>Jinnah Postgraduate Medical Centre</h3><p>Rafiqui Shaheed Road</p><a href="https://www.jpmc.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="civil hospital dr ruth pfau mission road"><div class="hospital-icon">➕</div><h3>Dr. Ruth K. M. Pfau Civil Hospital</h3><p>Mission Road</p><a href="https://www.chk.gov.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="indus hospital health network korangi"><div class="hospital-icon">💚</div><h3>Indus Hospital &amp; Health Network</h3><p>Korangi Crossing and other locations</p><a href="https://indushospital.org.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="ziauddin hospital clifton north nazimabad kemari"><div class="hospital-icon">🩺</div><h3>Dr. Ziauddin Hospital</h3><p>Clifton, North Nazimabad and other campuses</p><a href="https://www.ziauddinhospital.com/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="south city hospital clifton"><div class="hospital-icon">🏨</div><h3>South City Hospital</h3><p>Clifton</p><a href="https://southcityhospital.org/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="nicvd national institute cardiovascular diseases heart"><div class="hospital-icon">❤️</div><h3>National Institute of Cardiovascular Diseases</h3><p>Rafiqui Shaheed Road</p><a href="https://nicvd.org/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="nich national institute child health children"><div class="hospital-icon">🧸</div><h3>National Institute of Child Health</h3><p>Near JPMC</p><a href="https://www.nich.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="abbasi shaheed hospital nazimabad"><div class="hospital-icon">💙</div><h3>Abbasi Shaheed Hospital</h3><p>Nazimabad</p><a href="https://kmdc.edu.pk/abbassi-shaheed-hospital/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="dow university hospital ojha campus"><div class="hospital-icon">🔹</div><h3>Dow University Hospital</h3><p>Ojha Campus, Scheme 33</p><a href="https://www.duhs.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="darul sehat hospital gulistan johar"><div class="hospital-icon">🌿</div><h3>Darul Sehat Hospital</h3><p>Gulistan-e-Jauhar</p><a href="https://www.dsh.com.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="dean hospital karachi"><div class="hospital-icon">🏥</div><h3>Dean Hospital</h3><p>Scheme 33, Karachi</p><a href="https://www.deanhospital.com.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="memon medical institute hospital mmi scheme 33"><div class="hospital-icon">➕</div><h3>Memon Medical Institute Hospital</h3><p>Safoora Chowrangi, Scheme 33</p><a href="https://mmi.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="national medical centre nmc dha"><div class="hospital-icon">🩺</div><h3>National Medical Centre</h3><p>Korangi Road, near DHA</p><a href="https://www.nmcpakistan.com/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="mamji hospital federal b area"><div class="hospital-icon">🏥</div><h3>Mamji Hospital</h3><p>Federal B Area</p><a href="https://mamjihospital.com.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="lady dufferin hospital garden east"><div class="hospital-icon">💗</div><h3>Lady Dufferin Hospital</h3><p>Garden East</p><a href="https://ladydufferinhospital.org/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="karachi adventist hospital saddar"><div class="hospital-icon">✚</div><h3>Karachi Adventist Hospital</h3><p>M. A. Jinnah Road area</p><a href="https://www.7kah.org/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="imam clinic north nazimabad"><div class="hospital-icon">🩺</div><h3>Imam Clinic</h3><p>North Nazimabad area</p><a href="https://www.imamclinic.com/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="kharadar general hospital"><div class="hospital-icon">🏥</div><h3>Kharadar General Hospital</h3><p>Kharadar</p><a href="https://kgh.org.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="jinnah medical college hospital korangi"><div class="hospital-icon">➕</div><h3>Jinnah Medical College Hospital</h3><p>Korangi area</p><a href="https://jmch.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="the kidney centre karachi"><div class="hospital-icon">💚</div><h3>The Kidney Centre</h3><p>Rafiqui Shaheed Road</p><a href="https://kidneycentre.com/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="patel hospital gulshan iqbal"><div class="hospital-icon">🏥</div><h3>Patel Hospital</h3><p>Gulshan-e-Iqbal</p><a href="https://www.patel-hospital.org.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="burhani hospital saddar"><div class="hospital-icon">✚</div><h3>Burhani Hospital</h3><p>Saddar area</p><a href="https://burhanihospital.org.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="altamash general hospital clifton"><div class="hospital-icon">🩺</div><h3>Altamash General Hospital</h3><p>Clifton</p><a href="https://altamashhospital.com/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="national institute of blood diseases nibd"><div class="hospital-icon">🩸</div><h3>National Institute of Blood Diseases</h3><p>Karachi</p><a href="https://nibd.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a></article>
-      <article class="hospital-card" data-search="government hospital new karachi"><div class="hospital-icon">🏥</div><h3>Sindh Government Hospital, New Karachi</h3><p>New Karachi</p><a href="https://sindhhealth.gov.pk/" target="_blank" rel="noopener noreferrer">Health Dept Website ↗</a></article>
-      <article class="hospital-card" data-search="government hospital korangi"><div class="hospital-icon">🏥</div><h3>Sindh Government Hospital, Korangi</h3><p>Korangi</p><a href="https://sindhhealth.gov.pk/" target="_blank" rel="noopener noreferrer">Health Dept Website ↗</a></article>
-      <article class="hospital-card" data-search="government hospital liaquatabad"><div class="hospital-icon">🏥</div><h3>Sindh Government Hospital, Liaquatabad</h3><p>Liaquatabad</p><a href="https://sindhhealth.gov.pk/" target="_blank" rel="noopener noreferrer">Health Dept Website ↗</a></article>
+      <article class="hospital-card" data-search="aga khan university hospital stadium road"><div class="hospital-icon">🏥</div><h3>Aga Khan University Hospital</h3><p>Stadium Road</p><div class="hospital-card-links"><a href="https://hospitals.aku.edu/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Aga+Khan+University+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="liaquat national hospital lnh stadium road"><div class="hospital-icon">✚</div><h3>Liaquat National Hospital</h3><p>National Stadium Road</p><div class="hospital-card-links"><a href="https://www.lnh.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Liaquat+National+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="jinnah hospital jpmc jinnah postgraduate medical centre"><div class="hospital-icon">🏥</div><h3>Jinnah Postgraduate Medical Centre</h3><p>Rafiqui Shaheed Road</p><div class="hospital-card-links"><a href="https://www.jpmc.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=JPMC+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="civil hospital dr ruth pfau mission road"><div class="hospital-icon">➕</div><h3>Dr. Ruth K. M. Pfau Civil Hospital</h3><p>Mission Road</p><div class="hospital-card-links"><a href="https://www.chk.gov.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Civil+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="indus hospital health network korangi"><div class="hospital-icon">💚</div><h3>Indus Hospital &amp; Health Network</h3><p>Korangi Crossing and other locations</p><div class="hospital-card-links"><a href="https://indushospital.org.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Indus+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="ziauddin hospital clifton north nazimabad kemari"><div class="hospital-icon">🩺</div><h3>Dr. Ziauddin Hospital</h3><p>Clifton, North Nazimabad and other campuses</p><div class="hospital-card-links"><a href="https://www.ziauddinhospital.com/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Ziauddin+Hospital+Clifton+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="south city hospital clifton"><div class="hospital-icon">🏨</div><h3>South City Hospital</h3><p>Clifton</p><div class="hospital-card-links"><a href="https://southcityhospital.org/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=South+City+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="nicvd national institute cardiovascular diseases heart"><div class="hospital-icon">❤️</div><h3>National Institute of Cardiovascular Diseases</h3><p>Rafiqui Shaheed Road</p><div class="hospital-card-links"><a href="https://nicvd.org/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=NICVD+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="nich national institute child health children"><div class="hospital-icon">🧸</div><h3>National Institute of Child Health</h3><p>Near JPMC</p><div class="hospital-card-links"><a href="https://www.nich.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=NICH+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="abbasi shaheed hospital nazimabad"><div class="hospital-icon">💙</div><h3>Abbasi Shaheed Hospital</h3><p>Nazimabad</p><div class="hospital-card-links"><a href="https://kmdc.edu.pk/abbassi-shaheed-hospital/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Abbasi+Shaheed+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="dow university hospital ojha campus"><div class="hospital-icon">🔹</div><h3>Dow University Hospital</h3><p>Ojha Campus, Scheme 33</p><div class="hospital-card-links"><a href="https://www.duhs.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Dow+University+Hospital+Ojha+Campus" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="darul sehat hospital gulistan johar"><div class="hospital-icon">🌿</div><h3>Darul Sehat Hospital</h3><p>Gulistan-e-Jauhar</p><div class="hospital-card-links"><a href="https://www.dsh.com.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Darul+Sehat+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="dean hospital karachi"><div class="hospital-icon">🏥</div><h3>Dean Hospital</h3><p>Scheme 33, Karachi</p><div class="hospital-card-links"><a href="https://www.deanhospital.com.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Dean+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="memon medical institute hospital mmi scheme 33"><div class="hospital-icon">➕</div><h3>Memon Medical Institute Hospital</h3><p>Safoora Chowrangi, Scheme 33</p><div class="hospital-card-links"><a href="https://mmi.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Memon+Medical+Institute+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="national medical centre nmc dha"><div class="hospital-icon">🩺</div><h3>National Medical Centre</h3><p>Korangi Road, near DHA</p><div class="hospital-card-links"><a href="https://www.nmcpakistan.com/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=National+Medical+Centre+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="mamji hospital federal b area"><div class="hospital-icon">🏥</div><h3>Mamji Hospital</h3><p>Federal B Area</p><div class="hospital-card-links"><a href="https://mamjihospital.com.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Mamji+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="lady dufferin hospital garden east"><div class="hospital-icon">💗</div><h3>Lady Dufferin Hospital</h3><p>Garden East</p><div class="hospital-card-links"><a href="https://ladydufferinhospital.org/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Lady+Dufferin+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="karachi adventist hospital saddar"><div class="hospital-icon">✚</div><h3>Karachi Adventist Hospital</h3><p>M. A. Jinnah Road area</p><div class="hospital-card-links"><a href="https://www.7kah.org/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Karachi+Adventist+Hospital" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="imam clinic north nazimabad"><div class="hospital-icon">🩺</div><h3>Imam Clinic</h3><p>North Nazimabad area</p><div class="hospital-card-links"><a href="https://www.imamclinic.com/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Imam+Clinic+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="kharadar general hospital"><div class="hospital-icon">🏥</div><h3>Kharadar General Hospital</h3><p>Kharadar</p><div class="hospital-card-links"><a href="https://kgh.org.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Kharadar+General+Hospital" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="jinnah medical college hospital korangi"><div class="hospital-icon">➕</div><h3>Jinnah Medical College Hospital</h3><p>Korangi area</p><div class="hospital-card-links"><a href="https://jmch.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Jinnah+Medical+College+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="the kidney centre karachi"><div class="hospital-icon">💚</div><h3>The Kidney Centre</h3><p>Rafiqui Shaheed Road</p><div class="hospital-card-links"><a href="https://kidneycentre.com/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=The+Kidney+Centre+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="patel hospital gulshan iqbal"><div class="hospital-icon">🏥</div><h3>Patel Hospital</h3><p>Gulshan-e-Iqbal</p><div class="hospital-card-links"><a href="https://www.patel-hospital.org.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Patel+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="burhani hospital saddar"><div class="hospital-icon">✚</div><h3>Burhani Hospital</h3><p>Saddar area</p><div class="hospital-card-links"><a href="https://burhanihospital.org.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Burhani+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="altamash general hospital clifton"><div class="hospital-icon">🩺</div><h3>Altamash General Hospital</h3><p>Clifton</p><div class="hospital-card-links"><a href="https://altamashhospital.com/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=Altamash+General+Hospital+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="national institute of blood diseases nibd"><div class="hospital-icon">🩸</div><h3>National Institute of Blood Diseases</h3><p>Karachi</p><div class="hospital-card-links"><a href="https://nibd.edu.pk/" target="_blank" rel="noopener noreferrer">Hospital Website ↗</a><a href="https://maps.google.com/?q=National+Institute+of+Blood+Diseases+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="government hospital new karachi"><div class="hospital-icon">🏥</div><h3>Sindh Government Hospital, New Karachi</h3><p>New Karachi</p><div class="hospital-card-links"><a href="https://sindhhealth.gov.pk/" target="_blank" rel="noopener noreferrer">Health Dept Website ↗</a><a href="https://maps.google.com/?q=Sindh+Government+Hospital+New+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="government hospital korangi"><div class="hospital-icon">🏥</div><h3>Sindh Government Hospital, Korangi</h3><p>Korangi</p><div class="hospital-card-links"><a href="https://sindhhealth.gov.pk/" target="_blank" rel="noopener noreferrer">Health Dept Website ↗</a><a href="https://maps.google.com/?q=Sindh+Government+Hospital+Korangi+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
+      <article class="hospital-card" data-search="government hospital liaquatabad"><div class="hospital-icon">🏥</div><h3>Sindh Government Hospital, Liaquatabad</h3><p>Liaquatabad</p><div class="hospital-card-links"><a href="https://sindhhealth.gov.pk/" target="_blank" rel="noopener noreferrer">Health Dept Website ↗</a><a href="https://maps.google.com/?q=Sindh+Government+Hospital+Liaquatabad+Karachi" target="_blank" rel="noopener noreferrer">📍 Directions ↗</a></div></article>
 
     </div>
-    <p class="note" style="text-align:center;margin-top:20px">For additional hospitals and updated contact information, click the hospital website links above.</p>
+    <p class="note" style="text-align:center;margin-top:20px">For additional hospitals and updated contact information, click the hospital website or directions links above.</p>
   </div>
 </section>
 
